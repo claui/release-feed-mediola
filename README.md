@@ -125,8 +125,13 @@ To see a list of available tasks, run: `poetry run poe tasks`
 To execute release-feed-mediola, run:
 
 ```
-poetry run poe cli
+poetry run poe cli [product_name]
 ```
+
+For example, `poetry run poe cli neo` will generate a feed for
+AIO CREATOR NEO.
+
+For a list of valid product names, run: `poetry run poe doc`
 
 ## Contributing to release-feed-mediola
 
@@ -141,7 +146,7 @@ poetry run poe tests
 To execute a single test, run e. g.:
 
 ```
-poetry run poe tests -vv tests/test_api.py::test_hello
+poetry run poe tests -vv tests/test_api.py::test_from_dict
 ```
 
 ### Running the linter
