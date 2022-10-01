@@ -1,0 +1,360 @@
+{
+  "current": {
+    "info": {
+      "version": "2.11.3",
+      "sus": "2022-03-29",
+      "releasedate": "2022-09-26",
+      "license": "https://www.mediola.com/eula",
+      "lang": "DE, EN"
+    },
+    "downloads": [
+      {
+        "platform": "Windows",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.11/2.11.3/aioCreatorNeoInstaller.exe",
+        "size": "132 MB",
+        "filetype": "EXE",
+        "icon": "fa-windows"
+      },
+      {
+        "platform": "macOS",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.11/2.11.3/aioCreatorNeoInstaller.dmg",
+        "size": "200 MB",
+        "filetype": "DMG",
+        "icon": "fa-apple"
+      }
+    ]
+  },
+  "2.11.2": {
+    "info": {
+      "version": "2.11.2",
+      "sus": "2022-03-29",
+      "releasedate": "2022-06-13",
+      "license": "https://www.mediola.com/eula",
+      "lang": "DE, EN"
+    },
+    "downloads": [
+      {
+        "platform": "Windows",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.11/2.11.2/aioCreatorNeoInstaller.exe",
+        "size": "130 MB",
+        "filetype": "EXE",
+        "icon": "fa-windows"
+      },
+      {
+        "platform": "macOS",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.11/2.11.2/aioCreatorNeoInstaller.dmg",
+        "size": "200 MB",
+        "filetype": "DMG",
+        "icon": "fa-apple"
+      }
+    ]
+  },
+  "2.11.1": {
+    "info": {
+      "version": "2.11.1",
+      "sus": "2022-03-29",
+      "releasedate": "2022-05-02",
+      "license": "https://www.mediola.com/eula",
+      "lang": "DE, EN"
+    },
+    "downloads": [
+      {
+        "platform": "Windows",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.11/2.11.1/aioCreatorNeoInstaller.exe",
+        "size": "123 MB",
+        "filetype": "EXE",
+        "icon": "fa-windows"
+      },
+      {
+        "platform": "macOS",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.11/2.11.1/aioCreatorNeoInstaller.dmg",
+        "size": "193 MB",
+        "filetype": "DMG",
+        "icon": "fa-apple"
+      }
+    ]
+  },
+  "2.10.7": {
+    "info": {
+      "version": "2.10.7",
+      "sus": "2021-07-06",
+      "releasedate": "2022-09-26",
+      "license": "https://www.mediola.com/eula",
+      "lang": "DE, EN"
+    },
+    "downloads": [
+      {
+        "platform": "Windows",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.10/2.10.7/aioCreatorNeoInstaller.exe",
+        "size": "132 MB",
+        "filetype": "EXE",
+        "icon": "fa-windows"
+      },
+      {
+        "platform": "macOS",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.10/2.10.7/aioCreatorNeoInstaller.dmg",
+        "size": "200 MB",
+        "filetype": "DMG",
+        "icon": "fa-apple"
+      }
+    ]
+  },
+  "2.10.6": {
+    "info": {
+      "version": "2.10.6",
+      "sus": "2021-07-06",
+      "releasedate": "2022-06-13",
+      "license": "https://www.mediola.com/eula",
+      "lang": "DE, EN"
+    },
+    "downloads": [
+      {
+        "platform": "Windows",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.10/2.10.6/aioCreatorNeoInstaller.exe",
+        "size": "130 MB",
+        "filetype": "EXE",
+        "icon": "fa-windows"
+      },
+      {
+        "platform": "macOS",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.10/2.10.6/aioCreatorNeoInstaller.dmg",
+        "size": "200 MB",
+        "filetype": "DMG",
+        "icon": "fa-apple"
+      }
+    ]
+  },
+  "2.10.5": {
+    "info": {
+      "version": "2.10.5",
+      "sus": "2021-07-06",
+      "releasedate": "2022-05-02",
+      "license": "https://www.mediola.com/eula",
+      "lang": "DE, EN"
+    },
+    "downloads": [
+      {
+        "platform": "Windows",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.10/2.10.5/aioCreatorNeoInstaller.exe",
+        "size": "123 MB",
+        "filetype": "EXE",
+        "icon": "fa-windows"
+      },
+      {
+        "platform": "macOS",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.10/2.10.5/aioCreatorNeoInstaller.dmg",
+        "size": "193 MB",
+        "filetype": "DMG",
+        "icon": "fa-apple"
+      }
+    ]
+  },
+  "2.9.12": {
+    "info": {
+      "version": "2.9.12",
+      "sus": "2020-08-31",
+      "releasedate": "2022-09-26",
+      "license": "https://www.mediola.com/eula",
+      "lang": "DE, EN"
+    },
+    "downloads": [
+      {
+        "platform": "Windows",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.9/2.9.12/aioCreatorNeoInstaller.exe",
+        "size": "132 MB",
+        "filetype": "EXE",
+        "icon": "fa-windows"
+      },
+      {
+        "platform": "macOS",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.9/2.9.12/aioCreatorNeoInstaller.dmg",
+        "size": "200 MB",
+        "filetype": "DMG",
+        "icon": "fa-apple"
+      }
+    ]
+  },
+  "2.9.11": {
+    "info": {
+      "version": "2.9.11",
+      "sus": "2020-08-31",
+      "releasedate": "2022-06-13",
+      "license": "https://www.mediola.com/eula",
+      "lang": "DE, EN"
+    },
+    "downloads": [
+      {
+        "platform": "Windows",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.9/2.9.11/aioCreatorNeoInstaller.exe",
+        "size": "130 MB",
+        "filetype": "EXE",
+        "icon": "fa-windows"
+      },
+      {
+        "platform": "macOS",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.9/2.9.11/aioCreatorNeoInstaller.dmg",
+        "size": "200 MB",
+        "filetype": "DMG",
+        "icon": "fa-apple"
+      }
+    ]
+  },
+  "2.9.10": {
+    "info": {
+      "version": "2.9.10",
+      "sus": "2020-08-31",
+      "releasedate": "2022-05-02",
+      "license": "https://www.mediola.com/eula",
+      "lang": "DE, EN"
+    },
+    "downloads": [
+      {
+        "platform": "Windows",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.9/2.9.10/aioCreatorNeoInstaller.exe",
+        "size": "123 MB",
+        "filetype": "EXE",
+        "icon": "fa-windows"
+      },
+      {
+        "platform": "macOS",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.9/2.9.10/aioCreatorNeoInstaller.dmg",
+        "size": "193 MB",
+        "filetype": "DMG",
+        "icon": "fa-apple"
+      }
+    ]
+  },
+  "2.8.14": {
+    "info": {
+      "version": "2.8.14",
+      "sus": "2018-02-15",
+      "releasedate": "2021-12-15",
+      "license": "https://www.mediola.com/eula",
+      "lang": "DE, EN",
+      "note": "Der Versionszweig 2.8 wird nicht weiter gepflegt. Benutzer können kostenlos auf den nächsten Upgraden."
+    },
+    "downloads": [
+      {
+        "platform": "Windows",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.8/2.8.14/aioCreatorNeoInstaller.exe",
+        "size": "115 MB",
+        "filetype": "EXE",
+        "icon": "fa-windows"
+      },
+      {
+        "platform": "macOS",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.8/2.8.14/aioCreatorNeoInstaller.dmg",
+        "size": "182 MB",
+        "filetype": "DMG",
+        "icon": "fa-apple"
+      }
+    ]
+  },
+  "2.1.41 – ohne SUS": {
+    "info": {
+      "version": "2.1.41",
+      "sus": "",
+      "releasedate": "2022-09-26",
+      "license": "https://www.mediola.com/eula",
+      "lang": "DE, EN",
+      "note": "Der Versionszweig 2.1 erhält weiterhin kleinere Updates."
+    },
+    "downloads": [
+      {
+        "platform": "Windows",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.1/2.1.41/aioCreatorNeoInstaller.exe",
+        "size": "131 MB",
+        "filetype": "EXE",
+        "icon": "fa-windows"
+      },
+      {
+        "platform": "macOS",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.1/2.1.41/aioCreatorNeoInstaller.dmg",
+        "size": "198 MB",
+        "filetype": "DMG",
+        "icon": "fa-apple"
+      }
+    ]
+  },
+  "2.1.40 – ohne SUS": {
+    "info": {
+      "version": "2.1.40",
+      "sus": "",
+      "releasedate": "2022-06-13",
+      "license": "https://www.mediola.com/eula",
+      "lang": "DE, EN",
+      "note": "Der Versionszweig 2.1 erhält weiterhin kleinere Updates."
+    },
+    "downloads": [
+      {
+        "platform": "Windows",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.1/2.1.40/aioCreatorNeoInstaller.exe",
+        "size": "129 MB",
+        "filetype": "EXE",
+        "icon": "fa-windows"
+      },
+      {
+        "platform": "macOS",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.1/2.1.40/aioCreatorNeoInstaller.dmg",
+        "size": "198 MB",
+        "filetype": "DMG",
+        "icon": "fa-apple"
+      }
+    ]
+  },
+  "2.1.39 – ohne SUS": {
+    "info": {
+      "version": "2.1.39",
+      "sus": "",
+      "releasedate": "2022-05-02",
+      "license": "https://www.mediola.com/eula",
+      "lang": "DE, EN",
+      "note": "Der Versionszweig 2.1 erhält weiterhin kleinere Updates."
+    },
+    "downloads": [
+      {
+        "platform": "Windows",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.1/2.1.39/aioCreatorNeoInstaller.exe",
+        "size": "123 MB",
+        "filetype": "EXE",
+        "icon": "fa-windows"
+      },
+      {
+        "platform": "macOS",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/2.1/2.1.39/aioCreatorNeoInstaller.dmg",
+        "size": "191 MB",
+        "filetype": "DMG",
+        "icon": "fa-apple"
+      }
+    ]
+  },
+  "1.7.1 – ohne SUS": {
+    "info": {
+      "version": "1.7.1",
+      "sus": "",
+      "releasedate": "2017-02-09",
+      "license": "https://www.mediola.com/eula",
+      "lang": "DE, EN",
+      "note": "Veraltet, wird nicht weiter gepflegt. Benutzer ohne SUS können auf 2.1 upgraden."
+    },
+    "downloads": [
+      {
+        "platform": "Windows",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/1.7.1/aioCreatorNeoInstaller.exe",
+        "size": "56,4 MB",
+        "filetype": "EXE",
+        "icon": "fa-windows"
+      },
+      {
+        "platform": "macOS",
+        "link": "https://s3-eu-west-1.amazonaws.com/mediola-download/creator_neo/release/1.7.1/aioCreatorNeoInstaller.dmg",
+        "size": "88,7 MB",
+        "filetype": "DMG",
+        "icon": "fa-apple"
+      }
+    ]
+  },
+  "info": {
+    "more": "de:creator:more"
+  }
+}
