@@ -1,0 +1,22 @@
+[Unit]
+Description=Feed generator for Mediola releases
+After=network-online.target
+PartOf=%N.timer
+StartLimitBurst=3
+StartLimitIntervalSec=1h
+Wants=network-online.target
+
+[Service]
+ExecStart=/bin/bash -eux -o pipefail -c ' \
+    incoming="$$(/bin/mktemp --suffix=.%p)"; \
+    /usr/bin/%p "$${1}" | tee "$${incoming}"; \
+    DATA_DIR="$${XDG_DATA_HOME:-%h/.local/share}/feeds/%p/$${1}"; \
+    mkdir -p "$${DATA_DIR}";\
+    /bin/cp -f --no-preserve=mode \
+        "$${incoming}" \
+        "$${DATA_DIR}/feed.~atom"; \
+    /bin/mv -f "$${DATA_DIR}"/feed.{~,}atom \
+    ' _ '%i'
+Restart=on-failure
+RestartSec=15min
+RuntimeMaxSec=60

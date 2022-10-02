@@ -1,0 +1,11 @@
+[Unit]
+Description=Timer for generating a feed of Mediola releases
+
+[Timer]
+OnBootSec=1h
+OnCalendar=daily
+Persistent=yes
+
+[Install]
+WantedBy=timers.target
+
