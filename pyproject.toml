@@ -26,6 +26,9 @@ pytest = "*"
 [tool.poetry.group.dev.dependencies]
 types-requests = "^2.28.11"
 
+[tool.poetry.scripts]
+release-feed-mediola = "release_feed_mediola.cli:run"
+
 [tool.poe]
 verbosity = -1
 
