@@ -125,13 +125,15 @@ To see a list of available tasks, run: `poetry run poe tasks`
 To execute release-feed-mediola, run:
 
 ```
-poetry run poe cli [product_name]
+poetry run poe feed [product_name]
 ```
 
-For example, `poetry run poe cli neo` will generate a feed for
+For example, `poetry run poe feed neo` will generate a feed for
 AIO CREATOR NEO.
 
-For a list of valid product names, run: `poetry run poe doc`
+For a list of valid product names, run `poetry run poe doc`, then
+point your browser to
+[release_feed_mediola.html#release_feed](http://localhost:8080/release_feed_mediola.html#release_feed).
 
 ## Contributing to release-feed-mediola
 
