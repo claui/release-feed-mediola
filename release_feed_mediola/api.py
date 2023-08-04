@@ -15,6 +15,7 @@ from .settings \
 
 INFO = 'info'
 
+
 def release_feed(product_name: str) -> str:
     """Generates a release feed for the given package name.
 
@@ -97,8 +98,8 @@ def from_dict(product_name: str,
         entry.description(f'Version {info["version"]}')
         entry.link(**web_link)
         entry.rights(info['license'])
-        entry.pubDate(_datetime_from_iso_date(info['releasedate']))
-        entry.updated(_datetime_from_iso_date(info['releasedate']))
+        entry.pubDate(_datetime_from_iso_date(info.get('releasedate')))
+        entry.updated(_datetime_from_iso_date(info.get('releasedate')))
     generator.lastBuildDate(now())
     return str(generator.atom_str(pretty=True), encoding='utf-8')
 
@@ -110,7 +111,9 @@ def _download_releases_by_version() -> dict[str, Any]:
     return cast(dict[str, Any], response.json())
 
 
-def _datetime_from_iso_date(iso_date: str) -> datetime:
+def _datetime_from_iso_date(iso_date: str | None) -> datetime | None:
+    if iso_date is None:
+        return None
     _date = date.fromisoformat(iso_date)
     return datetime.combine(
         _date, time.min, tzinfo=MEDIOLA_IMPLIED_TIMEZONE)
