@@ -16,4 +16,13 @@ FEED_NAMESPACE = 'https://mediola.com/service/downloads'
 FEED_SOURCE_LANGUAGE = 'de'
 FEED_TITLE_TEMPLATE = '{product_name} – Releases'
 MEDIOLA_IMPLIED_TIMEZONE = ZoneInfo('Europe/Berlin')
+
+# List generated with Bash command line:
+# curl -L "${DOWNLOADS_JSON_URL?}" | jq -cr '.de.software | keys'
+MEDIOLA_PRODUCTS = [
+    'aioremote', 'aioremote_desktop', 'configtool', 'configtoolneo',
+    'firmware', 'iqontrol', 'iqontrol_neo', 'neo', 'neoserver',
+    'neoserver_ccu3', 'qrcompanion', 'steckerpro'
+]
+
 REQUEST_TIMEOUT_SEC = 20

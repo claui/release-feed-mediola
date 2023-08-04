@@ -11,7 +11,7 @@ from .settings \
     import DOWNLOADS_JSON_URL, DOWNLOADS_WEB_URL_TEMPLATE, \
     FEED_DESCRIPTION_TEMPLATE, FEED_LANGUAGE, FEED_NAMESPACE, \
     FEED_SOURCE_LANGUAGE, FEED_TITLE_TEMPLATE, \
-    MEDIOLA_IMPLIED_TIMEZONE, REQUEST_TIMEOUT_SEC
+    MEDIOLA_IMPLIED_TIMEZONE, MEDIOLA_PRODUCTS, REQUEST_TIMEOUT_SEC
 
 INFO = 'info'
 
@@ -38,13 +38,8 @@ def release_feed(product_name: str) -> str:
     packages_by_name = \
         releases_by_version[FEED_SOURCE_LANGUAGE]['software']
     if product_name not in packages_by_name:
-        # List generated with:
-        # curl -L $DOWNLOADS_JSON_URL | jq -cr '.de.software | keys'
-        raise ValueError('Name must be one of:'
-                         ' aioremote, aioremote_desktop, configtool,'
-                         ' configtoolneo, firmware, iqontrol, iqontrol_neo,'
-                         ' neo, neoserver, neoserver_ccu3, qrcompanion,'
-                         ' steckerpro')
+        raise ValueError(
+            f'Name must be one of: {", ".join(MEDIOLA_PRODUCTS)}')
     return from_dict(product_name, packages_by_name[product_name])
 
 
