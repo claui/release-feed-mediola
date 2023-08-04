@@ -10,6 +10,9 @@ import pytest
 from release_feed_mediola import from_dict
 
 
+CURRENT = 'current'
+
+
 @pytest.fixture(autouse=True)
 def disable_requests(monkeypatch: pytest.MonkeyPatch) -> None:
     """Remove the attribute requests.sessions.Session.request.
@@ -24,7 +27,7 @@ def fixture_packages_by_name() -> dict[str, Any]:
         filtered_dict = {
             version_key: release
             for version_key, release in json.load(neo_json).items()
-            if version_key == 'current'
+            if version_key == CURRENT
         }
         return cast(dict[str, Any], filtered_dict)
 
@@ -36,8 +39,7 @@ def fixture_now() -> Callable[[], datetime]:
 
 def test_from_dict(neo_package: dict[str, Any],
                    now: Callable[..., datetime]) -> None:
-    assert from_dict('neo', neo_package, now) == \
-        """<?xml version='1.0' encoding='UTF-8'?>
+    expected = """<?xml version='1.0' encoding='UTF-8'?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="de">
   <id>https://mediola.com/service/downloads</id>
   <title>neo – Releases</title>
@@ -56,3 +58,4 @@ def test_from_dict(neo_package: dict[str, Any],
   </entry>
 </feed>
 """  # pylint: disable=line-too-long
+    assert from_dict('neo', neo_package, now) == expected

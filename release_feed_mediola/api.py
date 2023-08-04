@@ -11,9 +11,10 @@ from .settings \
     import DOWNLOADS_JSON_URL, DOWNLOADS_WEB_URL_TEMPLATE, \
     FEED_DESCRIPTION_TEMPLATE, FEED_LANGUAGE, FEED_NAMESPACE, \
     FEED_SOURCE_LANGUAGE, FEED_TITLE_TEMPLATE, \
-    MEDIOLA_IMPLIED_TIMEZONE, REQUEST_TIMEOUT_SEC
+    MEDIOLA_IMPLIED_TIMEZONE, MEDIOLA_PRODUCTS, REQUEST_TIMEOUT_SEC
 
 INFO = 'info'
+
 
 def release_feed(product_name: str) -> str:
     """Generates a release feed for the given package name.
@@ -38,13 +39,8 @@ def release_feed(product_name: str) -> str:
     packages_by_name = \
         releases_by_version[FEED_SOURCE_LANGUAGE]['software']
     if product_name not in packages_by_name:
-        # List generated with:
-        # curl -L $DOWNLOADS_JSON_URL | jq -cr '.de.software | keys'
-        raise ValueError('Name must be one of:'
-                         ' aioremote, aioremote_desktop, configtool,'
-                         ' configtoolneo, firmware, iqontrol, iqontrol_neo,'
-                         ' neo, neoserver, neoserver_ccu3, qrcompanion,'
-                         ' steckerpro')
+        raise ValueError(
+            f'Name must be one of: {", ".join(MEDIOLA_PRODUCTS)}')
     return from_dict(product_name, packages_by_name[product_name])
 
 
@@ -102,8 +98,8 @@ def from_dict(product_name: str,
         entry.description(f'Version {info["version"]}')
         entry.link(**web_link)
         entry.rights(info['license'])
-        entry.pubDate(_datetime_from_iso_date(info['releasedate']))
-        entry.updated(_datetime_from_iso_date(info['releasedate']))
+        entry.pubDate(_datetime_from_iso_date(info.get('releasedate')))
+        entry.updated(_datetime_from_iso_date(info.get('releasedate')))
     generator.lastBuildDate(now())
     return str(generator.atom_str(pretty=True), encoding='utf-8')
 
@@ -115,7 +111,9 @@ def _download_releases_by_version() -> dict[str, Any]:
     return cast(dict[str, Any], response.json())
 
 
-def _datetime_from_iso_date(iso_date: str) -> datetime:
+def _datetime_from_iso_date(iso_date: str | None) -> datetime | None:
+    if iso_date is None:
+        return None
     _date = date.fromisoformat(iso_date)
     return datetime.combine(
         _date, time.min, tzinfo=MEDIOLA_IMPLIED_TIMEZONE)
