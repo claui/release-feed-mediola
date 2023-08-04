@@ -13,6 +13,7 @@ from .settings \
     FEED_SOURCE_LANGUAGE, FEED_TITLE_TEMPLATE, \
     MEDIOLA_IMPLIED_TIMEZONE, REQUEST_TIMEOUT_SEC
 
+INFO = 'info'
 
 def release_feed(product_name: str) -> str:
     """Generates a release feed for the given package name.
@@ -75,9 +76,9 @@ def from_dict(product_name: str,
     :return: the generated Atom feed as a string.
     """
     filtered_release_infos = (
-        release['info']
+        release[INFO]
         for _, release in releases_by_version.items()
-        if 'info' in release
+        if INFO in release
     )
     context = {
         'product_name': product_name
