@@ -42,8 +42,9 @@ jobs:
         run: poetry version --no-ansi --no-interaction "${{ inputs.target_version }}"
 
       - name: Gather bumped package version
-        run: env -i >> "${GITHUB_ENV}" \
-          "NEW_VERSION=$(poetry version --no-ansi --no-interaction --short)"
+        run: |
+          env -i >> "${GITHUB_ENV}" \
+            "NEW_VERSION=$(poetry version --no-ansi --no-interaction --short)"
 
       - name: Print bumped package version
         run: |
@@ -53,11 +54,11 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: pyproject.toml
-          message: Bump version to ${{ inputs.target_version }}
-          new_branch: version-bump/${{ inputs.target_version }}
+          message: Bump version to ${{ env.NEW_VERSION }}
+          new_branch: version-bump/${{ env.NEW_VERSION }}
           pathspec_error_handling: exitImmediately
           push: |-
-            origin version-bump/${{ inputs.target_version }} --force
+            origin version-bump/${{ env.NEW_VERSION }} --force
 
   ci-checks:
     needs: bump-version
