@@ -61,6 +61,7 @@ jobs:
           FILE_TO_COMMIT: pyproject.toml
           VERSION_BUMP_BRANCH: version-bump/${{ env.NEW_VERSION }}
         run: |
+          set -ex
           MESSAGE="Bump version to ${NEW_VERSION}"
           BASE_REF_SHA="$(git rev-parse @)"
           OBJECT_SHA=$(git rev-parse ":${FILE_TO_COMMIT}")
