@@ -39,7 +39,9 @@ jobs:
         run: poetry version --no-ansi --no-interaction
 
       - name: Bump package version
-        run: poetry version --no-ansi --no-interaction "${{ inputs.target_version }}"
+        env:
+          TARGET_VERSION: ${{ inputs.target_version }}
+        run: poetry version --no-ansi --no-interaction "${TARGET_VERSION}"
 
       - name: Gather bumped package version
         run: |
