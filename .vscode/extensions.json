@@ -1,5 +1,6 @@
 {
   "recommendations": [
+    "coolbear.systemd-unit-file",
     "editorconfig.editorconfig",
     "ms-python.python",
     "tamasfe.even-better-toml"
