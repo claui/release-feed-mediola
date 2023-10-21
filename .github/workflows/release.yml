@@ -62,7 +62,13 @@ jobs:
           VERSION_BUMP_BRANCH: version-bump/${{ env.NEW_VERSION }}
         run: |
           MESSAGE="Bump version to ${NEW_VERSION}"
+          BASE_REF_SHA="$(git rev-parse @)"
           OBJECT_SHA=$(git rev-parse ":${FILE_TO_COMMIT}")
+          gh api --method POST '/repos/:owner/:repo/git/refs' \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            --field ref="refs/heads/${VERSION_BUMP_BRANCH}"
+            --field sha="${BASE_REF_SHA}"
           gh api --method PUT "/repos/:owner/:repo/contents/${FILE_TO_COMMIT}" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
