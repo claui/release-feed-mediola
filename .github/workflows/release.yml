@@ -62,12 +62,16 @@ jobs:
           VERSION_BUMP_BRANCH: version-bump/${{ env.NEW_VERSION }}
         run: |
           MESSAGE="Bump version to ${NEW_VERSION}"
-          SHA=$(git rev-parse "${VERSION_BUMP_BRANCH}:${FILE_TO_COMMIT}")
+          BASE_SHA="$(git rev-parse --symbolic-full-name @)"
+          OBJECT_SHA=$(git rev-parse "${VERSION_BUMP_BRANCH}:${FILE_TO_COMMIT}")
+          gh api --method POST '/repos/:owner/:repo/git/refs' \
+            --field ref="refs/heads/${VERSION_BUMP_BRANCH}"
+            --field sha="${BASE_SHA}"
           gh api --method PUT "/repos/:owner/:repo/contents/${FILE_TO_COMMIT}" \
             --field message="${MESSAGE}" \
             --field content=@<(base64 -i "${FILE_TO_COMMIT}") \
             --field branch="${VERSION_BUMP_BRANCH}" \
-            --field sha="${SHA}"
+            --field sha="${OBJECT_SHA}"
 
   ci-checks:
     needs: bump-version
