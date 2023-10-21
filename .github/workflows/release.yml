@@ -61,15 +61,8 @@ jobs:
           FILE_TO_COMMIT: pyproject.toml
           VERSION_BUMP_BRANCH: version-bump/${{ env.NEW_VERSION }}
         run: |
-          set -ex
           MESSAGE="Bump version to ${NEW_VERSION}"
-          BASE_SHA="$(git rev-parse @)"
-          OBJECT_SHA=$(git rev-parse "${VERSION_BUMP_BRANCH}:${FILE_TO_COMMIT}")
-          gh api --method POST '/repos/:owner/:repo/git/refs' \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            --field ref="refs/heads/${VERSION_BUMP_BRANCH}"
-            --field sha="${BASE_SHA}"
+          OBJECT_SHA=$(git rev-parse ":${FILE_TO_COMMIT}")
           gh api --method PUT "/repos/:owner/:repo/contents/${FILE_TO_COMMIT}" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
