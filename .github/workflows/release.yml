@@ -42,8 +42,9 @@ jobs:
         run: poetry version --no-ansi --no-interaction "${{ inputs.target_version }}"
 
       - name: Gather bumped package version
-        run: env -i >> "${GITHUB_ENV}" \
-          "NEW_VERSION=$(poetry version --no-ansi --no-interaction --short)"
+        run: |
+          env -i >> "${GITHUB_ENV}" \
+            "NEW_VERSION=$(poetry version --no-ansi --no-interaction --short)"
 
       - name: Print bumped package version
         run: |
