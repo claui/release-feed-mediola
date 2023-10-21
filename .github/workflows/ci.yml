@@ -33,6 +33,9 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: true
 
+      - name: Print current package version
+        run: poetry version --no-ansi --no-interaction
+
       - name: Use specified Python version
         uses: actions/setup-python@v4
         with:
