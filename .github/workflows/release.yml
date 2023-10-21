@@ -52,15 +52,22 @@ jobs:
         run: |
           echo "New package version: ${NEW_VERSION}"
 
+      # Workaround for https://github.com/actions/runner/issues/667
+      # See also:
+      # https://gist.github.com/swinton/03e84635b45c78353b1f71e41007fc7c
       - name: Commit bumped package version
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: pyproject.toml
-          message: Bump version to ${{ env.NEW_VERSION }}
-          new_branch: version-bump/${{ env.NEW_VERSION }}
-          pathspec_error_handling: exitImmediately
-          push: |-
-            origin version-bump/${{ env.NEW_VERSION }} --force
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FILE_TO_COMMIT: pyproject.toml
+          VERSION_BUMP_BRANCH: version-bump/${{ env.NEW_VERSION }}
+        run: |
+          MESSAGE="Bump version to ${NEW_VERSION}"
+          SHA=$(git rev-parse "${VERSION_BUMP_BRANCH}:${FILE_TO_COMMIT}")
+          gh api --method PUT "/repos/:owner/:repo/contents/${FILE_TO_COMMIT}" \
+            --field message="${MESSAGE}" \
+            --field content=@<(base64 -i "${FILE_TO_COMMIT}") \
+            --field branch="${VERSION_BUMP_BRANCH}" \
+            --field sha="${SHA}"
 
   ci-checks:
     needs: bump-version
