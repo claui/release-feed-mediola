@@ -34,6 +34,9 @@ verbosity = -1
 [tool.poe.tasks]
 tasks.cmd = "poe -v"
 tasks.help = "List available tasks"
+# See also issue [nektos/act#1987](https://github.com/nektos/act/issues/1987)
+act.cmd = "act --container-options '-v act-toolcache:/opt/hostedtoolcache'"
+act.help = "Run CI locally (requires active Docker daemon)"
 doc.cmd = "pdoc release_feed_mediola !release_feed_mediola.settings"
 doc.help = "Browse documentation"
 feed.script = "release_feed_mediola.cli:run"
