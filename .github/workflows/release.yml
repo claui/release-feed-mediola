@@ -91,6 +91,8 @@ jobs:
             "PR_NUMBER=$(jq -r '.number' "${HOME}/create_pr_response.json")"
 
       - name: Add label to pull request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -ex
           gh api --method POST \
