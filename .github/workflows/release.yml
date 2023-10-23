@@ -59,7 +59,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FILE_TO_COMMIT: pyproject.toml
-          VERSION_BUMP_BRANCH: version-bump/${{ env.NEW_VERSION }}
+          RELEASE_BRANCH: release/${{ env.NEW_VERSION }}
         run: |
           set -ex
           MESSAGE="Bump version to ${NEW_VERSION}"
@@ -68,14 +68,14 @@ jobs:
           gh api --method POST '/repos/:owner/:repo/git/refs' \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            --field ref="refs/heads/${VERSION_BUMP_BRANCH}" \
+            --field ref="refs/heads/${RELEASE_BRANCH}" \
             --field sha="${BASE_REF_SHA}"
           gh api --method PUT "/repos/:owner/:repo/contents/${FILE_TO_COMMIT}" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             --field message="${MESSAGE}" \
             --field content=@<(base64 -i "${FILE_TO_COMMIT}") \
-            --field branch="${VERSION_BUMP_BRANCH}" \
+            --field branch="${RELEASE_BRANCH}" \
             --field sha="${OBJECT_SHA}"
 
   ci-checks:
