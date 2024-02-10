@@ -173,7 +173,7 @@ If you have [act](https://github.com/nektos/act) installed and a
 Docker daemon active, run:
 
 ```sh
-poetry run poe act
+act
 ```
 
 If that command fails with an error message like:
