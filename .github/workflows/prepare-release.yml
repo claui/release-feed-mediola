@@ -88,17 +88,12 @@ jobs:
             --field sha="${OBJECT_SHA}"
 
   build-dist:
-    if: github.event.pull_request.merged == true
     needs: bump-version
     uses: ./.github/workflows/build-dist.yml
     with:
       ref: release/${{ needs.bump-version.outputs.new_version }}
 
   publish-testpypi:
-    if: >-
-      github.event.pull_request.merged == true
-      && contains(github.event.pull_request.labels.*.name, 'auto-release')
-      && startsWith(github.head_ref, 'test-release/')
     needs: build-dist
     runs-on: ubuntu-22.04
     environment:
