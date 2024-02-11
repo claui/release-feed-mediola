@@ -14,7 +14,6 @@ jobs:
     needs: ci-checks
     uses: ./.github/workflows/build-dist.yml
     with:
-      ci_poetry_version: "1.7.1"
       ref: ${{ github.sha }}
 
   publish-release:

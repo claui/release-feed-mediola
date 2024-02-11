@@ -3,11 +3,6 @@ name: Build package distribution
 on:
   workflow_call:
     inputs:
-      ci_poetry_version:
-        description: |-
-          The Poetry version to be used to build the distribution.
-        type: string
-        required: true
       ref:
         description: |-
           The branch, tag or SHA to checkout.
@@ -23,37 +18,19 @@ jobs:
         with:
           ref: ${{ inputs.ref }}
 
-      - name: Load cached Poetry installation
-        id: load-cached-poetry
-        uses: actions/cache@v4
-        with:
-          path: ~/.local
-          key: poetry-release-v${{ inputs.ci_poetry_version }}
-
-      - name: Update PATH
-        if: steps.load-cached-poetry.outputs.cache-hit == 'true'
-        run: |
-          echo ~/.local/bin >> "${GITHUB_PATH}"
-
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
-        if: steps.load-cached-poetry.outputs.cache-hit != 'true'
-        with:
-          version: ${{ inputs.ci_poetry_version }}
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-
-      - name: Print current package version
-        run: poetry version --no-ansi --no-interaction
-
       - name: Use specified Python version
         uses: actions/setup-python@v5
         with:
-          cache: poetry
           python-version-file: .python-version
 
+      - name: Install pypa/build
+        run: |
+          python -m pip install --disable-pip-version-check \
+            --no-color --no-input --user \
+            build
+
       - name: Build wheel and source tarball
-        run: poetry build --no-ansi --no-interaction
+        run: python -m build
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
