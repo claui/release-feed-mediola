@@ -52,10 +52,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           RELEASE_BRANCH: ${{ github.head_ref }}
+          REPOSITORY: ${{ github.repository }}
           MERGE_COMMIT: ${{ github.sha }}
         run: |
           set -ex
           VERSION="${RELEASE_BRANCH#release/}"
-          gh release create "v${VERSION}" \
-            --draft --generate-notes --target "${MERGE_COMMIT}"
-          gh release upload "v${VERSION}" dist/*
+          gh release create "v${VERSION}" --draft --generate-notes \
+            --repo "${REPOSITORY}" --target "${MERGE_COMMIT}"
+          gh release upload "v${VERSION}" dist/* \
+            --repo "${REPOSITORY}"
