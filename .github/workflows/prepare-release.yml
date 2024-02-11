@@ -68,7 +68,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           FILE_TO_COMMIT: pyproject.toml
           NEW_VERSION: ${{ steps.gather_new_version.outputs.new_version }}
-          RELEASE_BRANCH: release/${{ env.NEW_VERSION }}
+          RELEASE_BRANCH: release/${{ steps.gather_new_version.outputs.new_version }}
         run: |
           set -ex
           MESSAGE="Bump version to ${NEW_VERSION}"
@@ -133,7 +133,7 @@ jobs:
         env:
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
           GITHUB_TOKEN: ${{ github.token }}
-          RELEASE_BRANCH: release/${{ env.NEW_VERSION }}
+          RELEASE_BRANCH: release/${{ needs.bump-version.outputs.new_version }}
         run: |
           set -ex
           MESSAGE="Prepare v${NEW_VERSION} release"
