@@ -32,6 +32,14 @@ jobs:
     permissions:
       id-token: write
     steps:
+      # Checking out just to make `gh release create` work.
+      # Using `gh release create --repo` on its own would yield
+      # an `HTTP 403: Resource not accessible by integration` error.
+      - name: Check out source tree
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.sha }}
+
       - name: Download the distributions
         uses: actions/download-artifact@v4
         with:
