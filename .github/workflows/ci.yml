@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Check out source tree
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Load cached Poetry installation
         id: load-cached-poetry
@@ -39,7 +39,7 @@ jobs:
         run: poetry version --no-ansi --no-interaction
 
       - name: Use specified Python version
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           cache: poetry
           python-version-file: .python-version

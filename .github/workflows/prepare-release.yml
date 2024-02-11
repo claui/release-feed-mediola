@@ -18,7 +18,7 @@ jobs:
       new_version: ${{ steps.gather_new_version.outputs.new_version }}
     steps:
       - name: Check out source tree
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Load cached Poetry installation
         id: load-cached-poetry
@@ -127,7 +127,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out source tree
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: release/${{ needs.bump-version.outputs.new_version }}
 
