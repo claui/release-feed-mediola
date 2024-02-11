@@ -4,88 +4,28 @@ on:
   pull_request_target:
     types: [closed]
 
+env:
+  CI_POETRY_VERSION: "1.6.1"
+
 jobs:
   ci-checks:
     if: github.event.pull_request.merged == true
     uses: ./.github/workflows/ci.yml
 
   build-dist:
-    runs-on: ubuntu-22.04
     if: github.event.pull_request.merged == true
     needs: ci-checks
-    steps:
-      - name: Check out merge commit
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.sha }}
+    uses: ./.github/workflows/build-dist.yml
+    with:
+      ref: ${{ github.sha }}
 
-      - name: Load cached Poetry installation
-        id: load-cached-poetry
-        uses: actions/cache@v4
-        with:
-          path: ~/.local
-          key: poetry-release-v${{ env.CI_POETRY_VERSION }}
-
-      - name: Update PATH
-        if: steps.load-cached-poetry.outputs.cache-hit == 'true'
-        run: |
-          echo ~/.local/bin >> "${GITHUB_PATH}"
-
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
-        if: steps.load-cached-poetry.outputs.cache-hit != 'true'
-        with:
-          version: ${{ env.CI_POETRY_VERSION }}
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-
-      - name: Print current package version
-        run: poetry version --no-ansi --no-interaction
-
-      - name: Use specified Python version
-        uses: actions/setup-python@v5
-        with:
-          cache: poetry
-          python-version-file: .python-version
-
-      - name: Build wheel and source tarball
-        run: poetry build --no-ansi --no-interaction
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: python-package-distributions
-          path: dist/
-          if-no-files-found: error
-
-  publish-testpypi:
-    runs-on: ubuntu-22.04
-    if: github.event.pull_request.merged == true
-    needs: build-dist
-    environment:
-      name: testpypi
-      url: https://test.pypi.org/p/release_feed_mediola
-    permissions:
-      id-token: write
-    steps:
-      - name: Download the distributions
-        uses: actions/download-artifact@v4
-        with:
-          name: python-package-distributions
-          path: dist/
-
-      - name: Publish to TestPyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          repository-url: https://test.pypi.org/legacy/
-
-  auto-release:
-    runs-on: ubuntu-22.04
+  publish-release:
     if: >-
       github.event.pull_request.merged == true
       && contains(github.event.pull_request.labels.*.name, 'auto-release')
       && startsWith(github.head_ref, 'release/')
-    needs: publish-testpypi
+    needs: build-dist
+    runs-on: ubuntu-22.04
     environment:
       name: pypi
       url: https://pypi.org/p/release_feed_mediola
