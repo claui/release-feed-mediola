@@ -35,10 +35,11 @@ To generate an Atom feed for a given Mediola product, run
 To see a list of supported Mediola products, run
 `release-feed-mediola` without arguments.
 
-## Automatic using a systemd service
+## Updating your feed automatically with systemd
 
 You may want to run `release-feed-mediola` periodically to generate
-and update a feed file using a systemd service. This requires Linux.
+and update a feed file using a systemd timer and service.
+This requires Linux.
 
 ### Installing the unit files
 
