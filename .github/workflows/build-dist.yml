@@ -16,7 +16,7 @@ jobs:
   build-dist:
     runs-on: ubuntu-22.04
     steps:
-      - name: Check out merge commit
+      - name: Check out source tree
         uses: actions/checkout@v3
         with:
           ref: ${{ inputs.ref }}

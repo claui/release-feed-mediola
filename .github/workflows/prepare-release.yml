@@ -146,9 +146,9 @@ jobs:
             --field title="${MESSAGE}" \
             --field head="${RELEASE_BRANCH}" \
             --field base="${DEFAULT_BRANCH}" \
-            --field body='When this PR is merged, a workflow will'`
-              `' automatically create a tag and publish a release.'`
-              `' (Using Poetry version ${{ env.CI_POETRY_VERSION }}).' \
+            --field body='Merging this PR will publish a PyPI package'`
+              `' based on the `'"${RELEASE_BRANCH}"'` branch and'`
+              `' create a draft release on GitHub.' \
             > "${HOME}/create_pr_response.json"
           env -i >> "${GITHUB_ENV}" \
             "PR_NUMBER=$(jq -r '.number' "${HOME}/create_pr_response.json")"
