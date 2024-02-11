@@ -55,7 +55,7 @@ jobs:
           MERGE_COMMIT: ${{ github.sha }}
         run: |
           set -ex
-          VERSION="${RELEASE_BRANCH#release/}")
+          VERSION="${RELEASE_BRANCH#release/}"
           gh release create "v${VERSION}" \
             --draft --generate-notes --target "${MERGE_COMMIT}"
           gh release upload "v${VERSION}" dist/*
