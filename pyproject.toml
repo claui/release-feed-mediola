@@ -1,5 +1,5 @@
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=1.9.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
@@ -12,12 +12,12 @@ license = "Apache-2.0"
 
 [tool.poetry.dependencies]
 python = "~3.11"
-feedgen = "^0.9.0"
+feedgen = "^1.0"
 requests = "^2.31.0"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "*"
-mypy = "~=1.5.1"
+mypy = "~=1.8"
 pdoc = "~=14.0"
 poethepoet = "~=0.24"
 pylint = "~=3.0"
