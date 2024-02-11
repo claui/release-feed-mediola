@@ -91,6 +91,7 @@ jobs:
     needs: bump-version
     uses: ./.github/workflows/build-dist.yml
     with:
+      ci_poetry_version: ${{ env.CI_POETRY_VERSION }}
       ref: release/${{ needs.bump-version.outputs.new_version }}
 
   publish-testpypi:
