@@ -46,8 +46,8 @@ jobs:
         uses: sigstore/gh-action-sigstore-python@v2.1.1
         with:
           inputs: >-
-            ./dist/*.tar.gz
-            ./dist/*.whl
+            dist/*.tar.gz
+            dist/*.whl
 
       - name: Create draft release
         env:
