@@ -13,18 +13,16 @@ jobs:
       contents: write
       id-token: write
     steps:
-      # Checking out just to make `gh release create` work.
-      # Using `gh release create --repo` on its own would yield
-      # an `HTTP 403: Resource not accessible by integration` error.
-      - name: Check out source tree
-        uses: actions/checkout@v3
-
       - name: Create draft release
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
         run: |
           set -ex
           VERSION="0.123.4.5.6-test"
+          echo Bar > foo
           gh release create "v${VERSION}" \
             --draft --generate-notes \
-            --target 4c9d087ca4480bb5a862a49d88ce15e79bf20963
+            --repo "${REPOSITORY}" --target 4c9d087ca4480bb5a862a49d88ce15e79bf20963
+          gh release upload "v${VERSION}" foo \
+            --repo "${REPOSITORY}"

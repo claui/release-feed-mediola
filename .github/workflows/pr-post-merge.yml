@@ -30,16 +30,9 @@ jobs:
       name: pypi
       url: https://pypi.org/p/release_feed_mediola
     permissions:
+      contents: write
       id-token: write
     steps:
-      # Checking out just to make `gh release create` work.
-      # Using `gh release create --repo` on its own would yield
-      # an `HTTP 403: Resource not accessible by integration` error.
-      - name: Check out source tree
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.sha }}
-
       - name: Download the distributions
         uses: actions/download-artifact@v4
         with:
@@ -60,10 +53,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           RELEASE_BRANCH: ${{ github.head_ref }}
+          REPOSITORY: ${{ github.repository }}
           MERGE_COMMIT: ${{ github.sha }}
         run: |
           set -ex
           VERSION="${RELEASE_BRANCH#release/}"
-          gh release create "v${VERSION}" \
-            --draft --generate-notes --target "${MERGE_COMMIT}"
-          gh release upload "v${VERSION}" dist/*
+          gh release create "v${VERSION}" --draft --generate-notes \
+            --repo "${REPOSITORY}" --target "${MERGE_COMMIT}"
+          gh release upload "v${VERSION}" dist/* \
+            --repo "${REPOSITORY}"
