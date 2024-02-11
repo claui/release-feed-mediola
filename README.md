@@ -5,225 +5,92 @@ A tool that generates Atom feeds for software updates of
 
 Not affiliated with Mediola – connected living AG.
 
-## Setting up release-feed-mediola
+## Installation
 
-To set up release-feed-mediola, you need three things:
+### Installing from PyPI
 
-1. The Python version manager `pyenv`.
+To install `release-feed-mediola` from PyPI, open a shell and run:
 
-2. A system-wide Python installation.
-
-3. The Python dependency manager `poetry`.
-
-### Installing pyenv
-
-The Python version manager `pyenv` makes sure you can always keep
-the exact Python version required by release-feed-mediola,
-regardless of your system Python.
-
-#### Installing pyenv on Windows
-
-While `pyenv` doesn’t support Windows, you can use a drop-in
-replacement called `pyenv-win`.
-
-To install `pyenv-win` on Windows, go to
-[github.com/pyenv-win/pyenv-win](https://github.com/pyenv-win/pyenv-win#installation)
-and follow one of the installation methods.
-
-#### Installing pyenv on Linux
-
-To install `pyenv` on Linux or WSL2, first make sure Python 3 is
-installed. Then follow the *Basic GitHub Checkout* method described
-at [github.com/pyenv/pyenv](https://github.com/pyenv/pyenv#basic-github-checkout).
-
-#### Installing pyenv on macOS
-
-To install `pyenv` on macOS, run:
-
-```
-brew install pyenv
+```shell
+pip install release_feed_mediola
 ```
 
-#### Checking your system-wide pyenv installation
+If that doesn’t work, try:
 
-To verify your `pyenv` is working, run:
-
-```
-pyenv --version
+```shell
+python3 -m pip install release_feed_mediola
 ```
 
-### Checking your system-wide Python installation
+### Installing from the AUR
 
-Make sure you have Python 3.7 or higher installed on your system
-and available in your PATH.
+Direct your favorite
+[AUR helper](https://wiki.archlinux.org/title/AUR_helpers) to the
+`release-feed-mediola` package.
 
-To check, run:
+## Usage
 
-```
-python --version
-```
+To generate an Atom feed for a given Mediola product, run
+`release-feed-mediola` with the product name as an argument.
 
-If that fails, try:
+To see a list of supported Mediola products, run
+`release-feed-mediola` without arguments.
 
-```
-python3 --version
-```
+## Automatic using a systemd service
 
-Proceed after you’ve confirmed one of those to work.
+You may want to run `release-feed-mediola` periodically to generate
+and update a feed file using a systemd service. This requires Linux.
 
-### Installing Poetry
+### Installing the unit files
 
-You’ll need `poetry` to manage development dependencies and the venv.
+First, install the systemd timer and service unit files.
 
-To install Poetry on Windows, use one of the
-[installation methods](https://python-poetry.org/docs/master/#installing-with-the-official-installer)
-described in Poetry’s documentation.
+- If you have installed `release-feed-mediola` from the AUR, the
+  unit files have already been installed.
 
-To install Poetry on macOS, run:
+- Otherwise, download the unit files `release-feed-mediola@.service`
+  and `release-feed-mediola@.timer` from the `contrib/systemd`
+  directory on the GitHub repository. Place the files into your
+  `/etc/systemd/user/` directory. You may have to edit the
+  paths inside the `ExecStart` directive to match your Linux distro.
 
-```
-brew install poetry
-```
+### Enabling the timer
 
-If you’re on Linux or WSL2, use your system package manager to
-install Poetry.
+To enable the systemd timer for a given Mediola product, run:
 
-Alternatively, use one of the
-[installation methods](https://python-poetry.org/docs/master/#installing-with-the-official-installer)
-described in Poetry’s documentation.
-
-#### Checking your Poetry installation
-
-To verify Poetry is working, run:
-
-```
-poetry --version
+```shell
+# Replace PRODUCT with the Mediola product name you want to track
+systemctl --user enable --now release-feed-mediola@PRODUCT.timer
 ```
 
-### Setting up your virtual environment
+You can enable and run multiple timers for different Mediola
+products at the same time.
 
-To set up your virtual environment, follow these steps:
+Each service will generate one `feed.atom` file per product once a
+day.
 
-1. Go to the project root directory.
+### Setting up your feed reader
 
-2. Run `pyenv install -s`.
+For each product you want to track, locate the generated `feed.atom`
+file in the `~/.local/share/feeds/release-feed-mediola/` directory
+hierarchy. Point your feed reader software to that file.
 
-3. Run `pyenv exec pip install poetry`.
+You may want to use a `file:///` URL if your reader doesn’t support
+feeds from the local filesystem directly. For example:
 
-4. Run `pyenv exec poetry install`.
+> `file:///home/yourusername/.local/share/feeds/release-feed-mediola/neo/feed.atom`
 
-You need to do the above steps only once.
+### Disabling the timer
 
-To update your dependencies after a `git pull`, run `poetry update`.
+To disable the systemd timer for a given Mediola product, run:
 
-## Development scripts and tasks
-
-To see a list of available tasks, run: `poetry run poe tasks`
-
-## Running release-feed-mediola
-
-To execute release-feed-mediola, run:
-
+```shell
+# Replace PRODUCT with the Mediola product name you want to track
+systemctl --user disable --now release-feed-mediola@PRODUCT.timer
 ```
-poetry run poe feed [product_name]
-```
-
-For example, `poetry run poe feed neo` will generate a feed for
-AIO CREATOR NEO.
-
-For a list of valid product names, run `poetry run poe doc`, then
-point your browser to
-[release_feed_mediola.html#release_feed](http://localhost:8080/release_feed_mediola.html#release_feed).
 
 ## Contributing to release-feed-mediola
 
-### Running the tests
-
-To execute the tests, run:
-
-```
-poetry run poe tests
-```
-
-To execute a single test, run e. g.:
-
-```
-poetry run poe tests -vv tests/test_api.py::test_from_dict
-```
-
-### Running the linter
-
-To execute the linter, run:
-
-```
-poetry run poe linter
-```
-
-### Running the static type check
-
-To execute the static type check, run:
-
-```
-poetry run poe typecheck
-```
-
-### Running the entire CI pipeline locally
-
-If you have [act](https://github.com/nektos/act) installed and a
-Docker daemon active, run:
-
-```sh
-act
-```
-
-If that command fails with an error message like:
-
-> OCI runtime exec failed: exec failed: unable to start container process: exec: "node": executable file not found in $PATH: unknown
-
-then run: `docker volume rm -f act-toolcache`
-
-### Generating project documentation
-
-To generate project documentation and open it in your browser, run:
-
-```
-poetry run poe doc
-```
-
-## Maintenance
-
-### Refreshing dependencies
-
-If you get errors after a Git pull, refresh your dependencies:
-
-```
-poetry update
-```
-
-### Rebuilding the virtual environment
-
-If you’ve run `poetry update` and you still get errors, rebuild
-the virtual environment:
-
-```
-poetry install
-```
-
-### Checking release-feed-mediola’s dependencies for vulnerabilities
-
-To check release-feed-mediola’s dependencies for known vulnerabilities, run:
-
-```
-poetry run poe check
-```
-
-### Checking release-feed-mediola’s dependencies for compatible updates
-
-To check release-feed-mediola’s dependencies for compatible updates, run:
-
-```
-poetry update --dry-run
-```
+See [`CONTRIBUTING.md`](https://github.com/claui/release-feed-mediola/blob/main/CONTRIBUTING.md).
 
 ## Legal notice
 
@@ -235,7 +102,7 @@ link to that EULA.
 
 ## License
 
-Copyright (c) 2022 Claudia Pellegrino
+Copyright (c) 2022 – 2024 Claudia Pellegrino
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
