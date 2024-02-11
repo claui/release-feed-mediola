@@ -1,0 +1,121 @@
+name: PR post-merge
+
+on:
+  pull_request_target:
+    types: [closed]
+
+jobs:
+  ci-checks:
+    if: github.event.pull_request.merged == true
+    uses: ./.github/workflows/ci.yml
+
+  build-dist:
+    runs-on: ubuntu-22.04
+    if: github.event.pull_request.merged == true
+    needs: ci-checks
+    steps:
+      - name: Check out merge commit
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Load cached Poetry installation
+        id: load-cached-poetry
+        uses: actions/cache@v3
+        with:
+          path: ~/.local
+          key: poetry-release-v${{ env.CI_POETRY_VERSION }}
+
+      - name: Update PATH
+        if: steps.load-cached-poetry.outputs.cache-hit == 'true'
+        run: |
+          echo ~/.local/bin >> "${GITHUB_PATH}"
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        if: steps.load-cached-poetry.outputs.cache-hit != 'true'
+        with:
+          version: ${{ env.CI_POETRY_VERSION }}
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Print current package version
+        run: poetry version --no-ansi --no-interaction
+
+      - name: Use specified Python version
+        uses: actions/setup-python@v5
+        with:
+          cache: poetry
+          python-version-file: .python-version
+
+      - name: Build wheel and source tarball
+        run: poetry build --no-ansi --no-interaction
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+          if-no-files-found: error
+
+  publish-testpypi:
+    runs-on: ubuntu-22.04
+    if: github.event.pull_request.merged == true
+    needs: build-dist
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/release_feed_mediola
+    permissions:
+      id-token: write
+    steps:
+      - name: Download the distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+
+      - name: Publish to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+
+  auto-release:
+    runs-on: ubuntu-22.04
+    if: >-
+      github.event.pull_request.merged == true
+      && contains(github.event.pull_request.labels.*.name, 'auto-release')
+      && startsWith(github.head_ref, 'release/')
+    needs: publish-testpypi
+    environment:
+      name: pypi
+      url: https://pypi.org/p/release_feed_mediola
+    permissions:
+      id-token: write
+    steps:
+      - name: Download the distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+      - name: Sign the distributions
+        uses: sigstore/gh-action-sigstore-python@v2.1.1
+        with:
+          inputs: >-
+            ./dist/*.tar.gz
+            ./dist/*.whl
+
+      - name: Create draft release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          RELEASE_BRANCH: ${{ github.head_ref }}
+          MERGE_COMMIT: ${{ github.sha }}
+        run: |
+          set -ex
+          VERSION="${RELEASE_BRANCH#release/}")
+          gh release create "v${VERSION}" \
+            --draft --generate-notes --target "${MERGE_COMMIT}"
+          gh release upload "v${VERSION}" dist/*
