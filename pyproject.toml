@@ -12,7 +12,7 @@ license = "Apache-2.0"
 
 [tool.poetry.dependencies]
 python = "~3.11"
-feedgen = "^0.9.0"
+feedgen = "^1.0"
 requests = "^2.31.0"
 
 [tool.poetry.dev-dependencies]
