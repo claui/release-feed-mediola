@@ -121,7 +121,9 @@ jobs:
             ./dist/*.whl
 
   create-pr:
-    needs: publish-testpypi
+    needs:
+      - bump-version
+      - publish-testpypi
     runs-on: ubuntu-22.04
     steps:
       - name: Check out source tree
