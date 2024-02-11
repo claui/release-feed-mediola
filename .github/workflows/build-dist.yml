@@ -3,9 +3,9 @@ name: Build package distribution
 on:
   workflow_call:
     inputs:
-      revision:
+      ref:
         description: |-
-          Git revision from which to build a distribution
+          The branch, tag or SHA to checkout.
         type: string
         required: true
 
@@ -19,7 +19,7 @@ jobs:
       - name: Check out merge commit
         uses: actions/checkout@v3
         with:
-          ref: ${{ inputs.revision }}
+          ref: ${{ inputs.ref }}
 
       - name: Load cached Poetry installation
         id: load-cached-poetry
