@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "release_feed_mediola"
-version = "0.1.1"
+version = "0.1.4"
 description = "Atom feed for software product releases of Mediola AG"
 readme = "README.md"
 authors = ["Claudia Pellegrino <clau@tiqua.de>"]
