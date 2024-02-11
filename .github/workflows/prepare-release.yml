@@ -14,6 +14,8 @@ env:
 jobs:
   bump-version:
     runs-on: ubuntu-22.04
+    outputs:
+      new_version: ${{ steps.gather_new_version.outputs.new_version }}
     steps:
       - name: Check out source tree
         uses: actions/checkout@v3
@@ -46,12 +48,15 @@ jobs:
           TARGET_VERSION: ${{ inputs.target_version }}
         run: poetry version --no-ansi --no-interaction "${TARGET_VERSION}"
 
-      - name: Gather bumped package version
+      - id: gather_new_version
+        name: Gather bumped package version
         run: |
-          env -i >> "${GITHUB_ENV}" \
-            "NEW_VERSION=$(poetry version --no-ansi --no-interaction --short)"
+          env -i >> "${GITHUB_OUTPUT}" \
+            "new_version=$(poetry version --no-ansi --no-interaction --short)"
 
       - name: Print bumped package version
+        env:
+          NEW_VERSION: ${{ steps.gather_new_version.outputs.new_version }}
         run: |
           echo "New package version: ${NEW_VERSION}"
 
@@ -62,6 +67,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           FILE_TO_COMMIT: pyproject.toml
+          NEW_VERSION: ${{ steps.gather_new_version.outputs.new_version }}
           RELEASE_BRANCH: release/${{ env.NEW_VERSION }}
         run: |
           set -ex
@@ -86,7 +92,7 @@ jobs:
     needs: bump-version
     uses: ./.github/workflows/build-dist.yml
     with:
-      ref: release/${{ env.NEW_VERSION }}
+      ref: release/${{ needs.bump-version.outputs.new_version }}
 
   publish-testpypi:
     if: >-
