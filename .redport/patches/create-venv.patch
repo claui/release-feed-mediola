@@ -1,0 +1,23 @@
+diff --git a/hooks/post_gen_project.py b/hooks/post_gen_project.py
+index 8e9ccab..084597a 100644
+--- a/hooks/post_gen_project.py
++++ b/hooks/post_gen_project.py
+@@ -2,9 +2,18 @@ import os
+ import platform
+ import shutil
+ import subprocess
++import sys
+ 
+ shutil.rmtree('licenses')
+ 
++print('Setting up virtual environment', file=sys.stderr)
++subprocess.run(
++    'pyenv exec python -m venv .venv',
++    check=True,
++    shell=True,
++    stdout=sys.stderr,
++)
++
+ {%- if cookiecutter.install_dependencies_now == "y" %}
+ poetry_environment = os.environ.copy()
+ poetry_environment.update({

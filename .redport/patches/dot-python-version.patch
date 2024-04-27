@@ -1,0 +1,7 @@
+diff --git a/{{ cookiecutter.project_slug }}/.python-version b/{{ cookiecutter.project_slug }}/.python-version
+new file mode 100644
+index 0000000..9ad6380
+--- /dev/null
++++ b/{{ cookiecutter.project_slug }}/.python-version	
+@@ -0,0 +1 @@
++3.11

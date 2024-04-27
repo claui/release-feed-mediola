@@ -1,0 +1,26 @@
+{
+  "upstream": {
+    "type": "cookiecutter-template",
+    "source": "https://github.com/claui/cookiecutter-python-package.git",
+    "commit": "2ecbd4e25018fd14c04db8af525a869cc32df8eb",
+    "replay": "cookiecutter_replay/cookiecutter-python-package.json",
+    "patches": [
+      "patches/dot-python-version.patch",
+      "patches/create-venv-2ecbd4e.patch",
+      "patches/redirect-stdout.patch",
+      "patches/disable-install-step-2ecbd4e.patch"
+    ],
+    "nextPatches": [
+      "patches/dot-python-version.patch",
+      "patches/create-venv.patch",
+      "patches/redirect-stdout.patch",
+      "patches/disable-install-step.patch"
+    ]
+  },
+  "diff": {
+    "excludes": [
+      "/.redport",
+      "/poetry.lock"
+    ]
+  }
+}
