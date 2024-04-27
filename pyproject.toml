@@ -11,7 +11,7 @@ authors = ["Claudia Pellegrino <clau@tiqua.de>"]
 license = "Apache-2.0"
 
 [tool.poetry.dependencies]
-python = "~3.11"
+python = ">=3.11"
 feedgen = "^1.0"
 requests = "^2.31.0"
 
