@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from release_feed_mediola import from_dict
+from release_feed_mediola.api import Api
 
 
 CURRENT = 'current'
@@ -19,6 +19,11 @@ def disable_requests(monkeypatch: pytest.MonkeyPatch) -> None:
     This is a safeguard against inadvertent network requests,
     causing them to fail."""
     monkeypatch.delattr('requests.sessions.Session.request')
+
+
+@pytest.fixture(name='api')
+def fixture_api() -> Api:
+    return Api()
 
 
 @pytest.fixture(name='neo_package')
@@ -37,7 +42,7 @@ def fixture_now() -> Callable[[], datetime]:
     return lambda: datetime.fromisoformat('2022-10-01T14:46:53+02:00')
 
 
-def test_from_dict(neo_package: dict[str, Any],
+def test_from_dict(api: Api, neo_package: dict[str, Any],
                    now: Callable[..., datetime]) -> None:
     expected = """<?xml version='1.0' encoding='UTF-8'?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="de">
@@ -58,4 +63,4 @@ def test_from_dict(neo_package: dict[str, Any],
   </entry>
 </feed>
 """  # pylint: disable=line-too-long
-    assert from_dict('neo', neo_package, now) == expected
+    assert api.from_dict('neo', neo_package, now) == expected

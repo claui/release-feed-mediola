@@ -38,13 +38,13 @@
       }
     },
     {
-      "label": "release-feed-mediola: Browse documentation",
+      "label": "release-feed-mediola: Browse HTML documentation",
       "type": "process",
       "command": "poetry",
       "args": [
         "run",
         "poe",
-        "doc"
+        "html"
       ],
       "problemMatcher": [],
       "group": "build",
