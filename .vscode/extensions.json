@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "coolbear.systemd-unit-file",
+    "dawidd6.debian-vscode",
     "editorconfig.editorconfig",
     "ms-python.python",
     "tamasfe.even-better-toml"
