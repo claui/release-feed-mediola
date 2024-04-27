@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from release_feed_mediola import from_dict
+from release_feed_mediola.api import Api
 
 
 CURRENT = 'current'
@@ -58,4 +58,4 @@ def test_from_dict(neo_package: dict[str, Any],
   </entry>
 </feed>
 """  # pylint: disable=line-too-long
-    assert from_dict('neo', neo_package, now) == expected
+    assert Api('neo').from_dict(neo_package, now) == expected

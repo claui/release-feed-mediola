@@ -5,6 +5,7 @@ from zoneinfo import ZoneInfo
 
 PROJECT_ROOT = Path(__file__).parent.parent.absolute()
 PACKAGE_ROOT = Path(__file__).parent.absolute()
+PYPROJECT_TOML = PROJECT_ROOT / 'pyproject.toml'
 
 DOWNLOADS_JSON_URL = \
     'https://www.mediola.com/wp-content/sub-projects/helpdesk/data/downloads.json'
