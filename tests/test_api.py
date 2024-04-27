@@ -21,11 +21,6 @@ def disable_requests(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.delattr('requests.sessions.Session.request')
 
 
-@pytest.fixture(name='api')
-def fixture_api() -> Api:
-    return Api()
-
-
 @pytest.fixture(name='neo_package')
 def fixture_packages_by_name() -> dict[str, Any]:
     with open('tests/fixtures/neo.json', encoding='utf-8') as neo_json:
@@ -42,7 +37,7 @@ def fixture_now() -> Callable[[], datetime]:
     return lambda: datetime.fromisoformat('2022-10-01T14:46:53+02:00')
 
 
-def test_from_dict(api: Api, neo_package: dict[str, Any],
+def test_from_dict(neo_package: dict[str, Any],
                    now: Callable[..., datetime]) -> None:
     expected = """<?xml version='1.0' encoding='UTF-8'?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="de">
@@ -63,4 +58,4 @@ def test_from_dict(api: Api, neo_package: dict[str, Any],
   </entry>
 </feed>
 """  # pylint: disable=line-too-long
-    assert api.from_dict('neo', neo_package, now) == expected
+    assert Api('neo').from_dict(neo_package, now) == expected

@@ -1,5 +1,5 @@
 Welcome to release-feed-mediola's documentation!
-====================================
+================================================
 
 .. toctree::
    :maxdepth: 2
