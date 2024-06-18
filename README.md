@@ -39,7 +39,7 @@ To see a list of supported Mediola products, run
 
 You may want to run `release-feed-mediola` periodically to generate
 and update a feed file using a systemd timer and service.
-This requires Linux.
+This requires a Linux system and systemd version 256 or newer.
 
 ### Installing the unit files
 
