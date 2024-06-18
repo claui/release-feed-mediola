@@ -9,7 +9,7 @@ on:
         required: true
 
 env:
-  CI_POETRY_VERSION: "1.7.1"
+  CI_POETRY_VERSION: "1.8.3"
 
 jobs:
   bump-version:

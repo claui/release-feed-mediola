@@ -11,20 +11,20 @@ authors = ["Claudia Pellegrino <clau@tiqua.de>"]
 license = "Apache-2.0"
 
 [tool.poetry.dependencies]
-python = ">=3.11"
+python = ">=3.12"
 feedgen = "^1.0"
-requests = "^2.31.0"
+requests = "^2.32.0"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "*"
-mypy = "~=1.8"
+mypy = "~=1.10"
 pdoc = "~=14.0"
-poethepoet = "~=0.24"
+poethepoet = "~=0.26"
 pylint = "~=3.0"
 pytest = "*"
 
 [tool.poetry.group.dev.dependencies]
-types-requests = "^2.31.0"
+types-requests = "^2.32.0"
 
 [tool.poetry.scripts]
 release-feed-mediola = "release_feed_mediola.cli:run"

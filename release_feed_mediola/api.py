@@ -40,7 +40,7 @@ def release_feed(product_name: str) -> str:
         releases_by_version[FEED_SOURCE_LANGUAGE]['software']
     if product_name not in packages_by_name:
         raise ValueError(
-            f'Name must be one of: {", ".join(MEDIOLA_PRODUCTS)}')
+            f'Name must be one of: {', '.join(MEDIOLA_PRODUCTS)}')
     return from_dict(product_name, packages_by_name[product_name])
 
 
@@ -93,9 +93,9 @@ def from_dict(product_name: str,
         FEED_DESCRIPTION_TEMPLATE.format(**context))
     for info in filtered_release_infos:
         entry = generator.add_entry()
-        entry.id(f'{FEED_NAMESPACE}/versions/{info["version"]}')
+        entry.id(f'{FEED_NAMESPACE}/versions/{info['version']}')
         entry.title(info['version'])
-        entry.description(f'Version {info["version"]}')
+        entry.description(f'Version {info['version']}')
         entry.link(**web_link)
         entry.rights(info['license'])
         entry.pubDate(_datetime_from_iso_date(info.get('releasedate')))
