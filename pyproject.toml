@@ -18,7 +18,7 @@ requests = "^2.32.0"
 [tool.poetry.dev-dependencies]
 autopep8 = "*"
 mypy = "~=1.10"
-pdoc = "~=14.0"
+pdoc = "~=14.5"
 poethepoet = "~=0.26"
 pylint = "~=3.0"
 pytest = "*"
