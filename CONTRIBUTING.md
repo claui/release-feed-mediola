@@ -35,7 +35,7 @@ at [github.com/pyenv/pyenv](https://github.com/pyenv/pyenv#basic-github-checkout
 
 To install `pyenv` on macOS, run:
 
-```
+```shell
 brew install pyenv
 ```
 
@@ -43,24 +43,24 @@ brew install pyenv
 
 To verify your `pyenv` is working, run:
 
-```
+```shell
 pyenv --version
 ```
 
 ### Checking your system-wide Python installation
 
-Make sure you have Python 3.7 or higher installed on your system
+Make sure you have Python 3.8 or higher installed on your system
 and available in your PATH.
 
 To check, run:
 
-```
+```shell
 python --version
 ```
 
 If that fails, try:
 
-```
+```shell
 python3 --version
 ```
 
@@ -76,7 +76,7 @@ described in Poetry’s documentation.
 
 To install Poetry on macOS, run:
 
-```
+```shell
 brew install poetry
 ```
 
@@ -91,7 +91,7 @@ described in Poetry’s documentation.
 
 To verify Poetry is working, run:
 
-```
+```shell
 poetry --version
 ```
 
@@ -103,9 +103,9 @@ To set up your virtual environment, follow these steps:
 
 2. Run `pyenv install -s`.
 
-3. Run `pyenv exec pip install poetry`.
+3. Run `pyenv exec python -m venv .venv`.
 
-4. Run `pyenv exec poetry install`.
+4. Run `poetry install`.
 
 You need to do the above steps only once.
 
@@ -115,11 +115,11 @@ To update your dependencies after a `git pull`, run `poetry update`.
 
 To see a list of available tasks, run: `poetry run poe tasks`
 
-## Running release-feed-mediola
+### Running release-feed-mediola
 
 To execute release-feed-mediola, run:
 
-```
+```shell
 poetry run poe feed [product_name]
 ```
 
@@ -130,19 +130,17 @@ For a list of valid product names, run `poetry run poe doc`, then
 point your browser to
 [release_feed_mediola.html#release_feed](http://localhost:8080/release_feed_mediola.html#release_feed).
 
-## Contributing to release-feed-mediola
-
 ### Running the tests
 
 To execute the tests, run:
 
-```
+```shell
 poetry run poe tests
 ```
 
 To execute a single test, run e. g.:
 
-```
+```shell
 poetry run poe tests -vv tests/test_api.py::test_from_dict
 ```
 
@@ -150,7 +148,7 @@ poetry run poe tests -vv tests/test_api.py::test_from_dict
 
 To execute the linter, run:
 
-```
+```shell
 poetry run poe linter
 ```
 
@@ -158,7 +156,7 @@ poetry run poe linter
 
 To execute the static type check, run:
 
-```
+```shell
 poetry run poe typecheck
 ```
 
@@ -167,7 +165,7 @@ poetry run poe typecheck
 If you have [act](https://github.com/nektos/act) installed and a
 Docker daemon active, run:
 
-```sh
+```shell
 act
 ```
 
@@ -181,7 +179,7 @@ then run: `docker volume rm -f act-toolcache`
 
 To generate project documentation and open it in your browser, run:
 
-```
+```shell
 poetry run poe doc
 ```
 
@@ -191,7 +189,7 @@ poetry run poe doc
 
 If you get errors after a Git pull, refresh your dependencies:
 
-```
+```shell
 poetry update
 ```
 
@@ -200,23 +198,14 @@ poetry update
 If you’ve run `poetry update` and you still get errors, rebuild
 the virtual environment:
 
-```
+```shell
 poetry install
-```
-
-### Checking release-feed-mediola’s dependencies for vulnerabilities
-
-To check release-feed-mediola’s dependencies for known vulnerabilities, run:
-
-```
-poetry run poe check
 ```
 
 ### Checking release-feed-mediola’s dependencies for compatible updates
 
 To check release-feed-mediola’s dependencies for compatible updates, run:
 
-```
+```shell
 poetry update --dry-run
 ```
-
