@@ -26,8 +26,8 @@ This requires a Linux system and systemd version 256 or newer.
 
 First, install the systemd timer and service unit files.
 
-- If you have installed `release-feed-mediola` from the AUR, the
-  unit files have already been installed.
+- If you have installed `release-feed-mediola` from a Debian package
+  or from the AUR, the unit files have already been installed.
 
 - Otherwise, download the unit files `release-feed-mediola@.service`
   and `release-feed-mediola@.timer` from the `contrib/systemd`
