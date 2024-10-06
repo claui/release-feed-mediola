@@ -16,6 +16,9 @@ indent_size = 16
 end_of_line = lf
 trim_trailing_whitespace = false
 
+[debian/rules]
+indent_style = tab
+
 [*.json]
 indent_size = 2
 
