@@ -15,4 +15,5 @@ override_dh_auto_build:
 	PYTHONPATH=. python3 -m sphinx -NW -b man doc/sphinx build/man
 
 override_dh_missing:
+	dh_missing
 	dh_missing --sourcedir=contrib
