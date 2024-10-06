@@ -41,7 +41,7 @@ def release_feed(product_name: str | None) -> str:
         raise ValueError("Name cannot be empty.")
     if product_name not in packages_by_name:
         raise ValueError(
-            f'Name must be one of: {", ".join(MEDIOLA_PRODUCTS)}',
+            f"Name must be one of: {", ".join(MEDIOLA_PRODUCTS)}",
         )
     return feed.from_dict(
         product_name,

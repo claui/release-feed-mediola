@@ -56,9 +56,9 @@ def from_dict(
     generator.description(FEED_DESCRIPTION_TEMPLATE.format(**context))
     for info in filtered_release_infos:
         entry = generator.add_entry()
-        entry.id(f'{FEED_NAMESPACE}/versions/{info["version"]}')
+        entry.id(f"{FEED_NAMESPACE}/versions/{info["version"]}")
         entry.title(info["version"])
-        entry.description(f'Version {info["version"]}')
+        entry.description(f"Version {info["version"]}")
         entry.link(**web_link)
         entry.rights(info["license"])
         entry.pubDate(_datetime_from_iso_date(info.get("releasedate")))
