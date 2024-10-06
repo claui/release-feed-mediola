@@ -8,12 +8,9 @@
       "patches/dot-python-version.patch",
       "patches/create-venv.patch",
       "patches/redirect-stdout.patch",
-      "patches/disable-install-step.patch"
+      "patches/disable-install-step.before.819f24c.patch"
     ],
     "nextPatches": [
-      "patches/dot-python-version.patch",
-      "patches/create-venv.patch",
-      "patches/redirect-stdout.patch",
       "patches/disable-install-step.patch"
     ]
   },
