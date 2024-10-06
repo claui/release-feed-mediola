@@ -2,7 +2,7 @@
   "upstream": {
     "type": "cookiecutter-template",
     "source": "https://github.com/claui/cookiecutter-python-package.git",
-    "commit": "c44a0175d4a2f93bebe0cadc377867f53329633f",
+    "commit": "d9f839e34864cbd0c38f9bfd53e9d81aa1c2a2d1",
     "replay": "cookiecutter_replay/cookiecutter-python-package.json",
     "patches": [
       "patches/disable-install-step.patch"

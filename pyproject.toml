@@ -66,7 +66,7 @@ tasks.cmd = "poe -v"
 tasks.help = "List available tasks"
 doc.cmd = "sphinx-build -aqEW -b man doc/sphinx build/man"
 doc.help = "Generate documentation"
-feed.script = "release_feed_mediola.cli:run('release_feed')"
+feed.script = "release_feed_mediola.cli:run"
 feed.help = """
 Print an Atom feed generated from the Mediola website. Requires an \
 argument."""
