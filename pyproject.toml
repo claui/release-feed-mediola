@@ -22,13 +22,8 @@ warn_unused_ignores = true
 name = "release_feed_mediola"
 version = "0.3.0"
 description = "Atom feed for software product releases of Mediola AG"
-readme = [
-    "README.md",
-    "USAGE.md",
-]
-authors = [
-    "Claudia Pellegrino <clau@tiqua.de>",
-]
+readme = ["README.md", "USAGE.md"]
+authors = ["Claudia Pellegrino <clau@tiqua.de>"]
 license = "Apache-2.0"
 # See https://pypi.org/pypi?%3Aaction=list_classifiers
 classifiers = [
@@ -71,7 +66,7 @@ tasks.cmd = "poe -v"
 tasks.help = "List available tasks"
 doc.cmd = "sphinx-build -aqEW -b man doc/sphinx build/man"
 doc.help = "Generate documentation"
-feed.script = "release_feed_mediola.cli:run"
+feed.script = "release_feed_mediola.cli:run('release_feed')"
 feed.help = """
 Print an Atom feed generated from the Mediola website. Requires an \
 argument."""

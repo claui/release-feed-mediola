@@ -7,10 +7,10 @@ from typing import Any, cast
 
 import pytest
 
-from release_feed_mediola.api import Api
+from release_feed_mediola import feed
 
 
-CURRENT = 'current'
+CURRENT = "current"
 
 
 @pytest.fixture(autouse=True)
@@ -18,12 +18,12 @@ def disable_requests(monkeypatch: pytest.MonkeyPatch) -> None:
     """Remove the attribute requests.sessions.Session.request.
     This is a safeguard against inadvertent network requests,
     causing them to fail."""
-    monkeypatch.delattr('requests.sessions.Session.request')
+    monkeypatch.delattr("requests.sessions.Session.request")
 
 
-@pytest.fixture(name='neo_package')
+@pytest.fixture(name="neo_package")
 def fixture_packages_by_name() -> dict[str, Any]:
-    with open('tests/fixtures/neo.json', encoding='utf-8') as neo_json:
+    with open("tests/fixtures/neo.json", encoding="utf-8") as neo_json:
         filtered_dict = {
             version_key: release
             for version_key, release in json.load(neo_json).items()
@@ -32,13 +32,12 @@ def fixture_packages_by_name() -> dict[str, Any]:
         return cast(dict[str, Any], filtered_dict)
 
 
-@pytest.fixture(name='now')
+@pytest.fixture(name="now")
 def fixture_now() -> Callable[[], datetime]:
-    return lambda: datetime.fromisoformat('2022-10-01T14:46:53+02:00')
+    return lambda: datetime.fromisoformat("2022-10-01T14:46:53+02:00")
 
 
-def test_from_dict(neo_package: dict[str, Any],
-                   now: Callable[..., datetime]) -> None:
+def test_from_dict(neo_package: dict[str, Any], now: Callable[..., datetime]) -> None:
     expected = """<?xml version='1.0' encoding='UTF-8'?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="de">
   <id>https://mediola.com/service/downloads</id>
@@ -58,4 +57,4 @@ def test_from_dict(neo_package: dict[str, Any],
   </entry>
 </feed>
 """  # pylint: disable=line-too-long
-    assert Api('neo').from_dict(neo_package, now) == expected
+    assert feed.from_dict("neo", neo_package, now) == expected

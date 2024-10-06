@@ -12,12 +12,11 @@ from release_feed_mediola.version import version
 
 __all__ = [
     # Tell pdoc to pick up all re-exported symbols
-    'Api',
-
+    "Api",
     # Modules that every subpackage should see
     # (This also exposes them to pdoc)
-    'api',
-    'settings',
+    "api",
+    "settings",
 ]
 
 __version__ = version()
