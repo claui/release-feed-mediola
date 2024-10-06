@@ -36,7 +36,6 @@ classifiers = [
 [tool.poetry.dependencies]
 python = ">=3.12"
 colorama = "*"
-dataclass-wizard = ">=0.22"
 feedgen = "^1.0"
 fire = "*"
 requests = "^2.31.0"
