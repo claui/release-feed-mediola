@@ -1,4 +1,3 @@
-/.venv/
 /build/
 /debian/.debhelper/generated/
 /debian/debhelper-build-stamp
