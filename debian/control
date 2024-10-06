@@ -1,13 +1,5 @@
 Source: release-feed-mediola
-# List of sections:
-# admin, cli-mono, comm, database, debug, devel, doc, editors, education,
-# electronics, embedded, fonts, games, gnome, gnu-r, gnustep, graphics,
-# hamradio, haskell, httpd, interpreters, introspection, java, javascript,
-# kde, kernel, libdevel, libs, lisp, localization, mail, math, metapackages,
-# misc, net, news, ocaml, oldlibs, otherosfs, perl, php, python, ruby,
-# rust, science, shells, sound, tasks, tex, text, utils, vcs, video, web,
-# x11, xfce, zope
-Section:
+Section: net
 Priority: optional
 Maintainer: Claudia Pellegrino <clau@tiqua.de>
 Build-Depends: debhelper-compat (= 13), dh-python, pybuild-plugin-pyproject, python3-all, python3-myst-parser, python3-poetry-core, python3-sphinx

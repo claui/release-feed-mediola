@@ -25,13 +25,7 @@ description = "Atom feed for software product releases of Mediola AG"
 readme = ["README.md", "USAGE.md"]
 authors = ["Claudia Pellegrino <clau@tiqua.de>"]
 license = "Apache-2.0"
-# See https://pypi.org/pypi?%3Aaction=list_classifiers
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Operating System :: MacOS",
-    "Operating System :: POSIX :: Linux",
-    "Topic :: Utilities",
-]
+classifiers = ["Development Status :: 3 - Alpha", "Topic :: Utilities"]
 
 [tool.poetry.dependencies]
 python = ">=3.12"
