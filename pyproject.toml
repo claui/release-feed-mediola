@@ -30,7 +30,7 @@ classifiers = ["Development Status :: 3 - Alpha", "Topic :: Utilities"]
 [tool.poetry.dependencies]
 python = ">=3.12"
 colorama = "*"
-feedgen = "^1.0"
+feedgenerator = "^2.1"
 fire = "*"
 requests = "^2.31.0"
 
