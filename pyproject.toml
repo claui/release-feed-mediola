@@ -2,28 +2,50 @@
 requires = ["poetry-core>=1.9.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.mypy]
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_subclassing_any = true
+disallow_untyped_calls = true
+disallow_untyped_decorators = true
+disallow_untyped_defs = true
+files = "release_feed_mediola/**/*.py,tests/**/*.py"
+implicit_reexport = false
+no_implicit_optional = true
+strict_equality = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unused_ignores = true
+
 [tool.poetry]
 name = "release_feed_mediola"
 version = "0.3.0"
 description = "Atom feed for software product releases of Mediola AG"
-readme = "README.md"
+readme = ["README.md", "USAGE.md"]
 authors = ["Claudia Pellegrino <clau@tiqua.de>"]
 license = "Apache-2.0"
+classifiers = ["Development Status :: 3 - Alpha", "Topic :: Utilities"]
 
 [tool.poetry.dependencies]
 python = ">=3.12"
-feedgen = "^1.0"
-requests = "^2.32.0"
+colorama = "*"
+feedgenerator = "^2.1"
+fire = "*"
+requests = "^2.31.0"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "*"
-mypy = "~=1.10"
-pdoc = "~=14.5"
-poethepoet = "~=0.26"
-pylint = "~=3.0"
+mypy = ">=1.10"
+myst-parser = ">=2.0.0"
+pdoc = ">=14.5"
+poethepoet = ">=0.26"
+pylint = ">=3.0"
 pytest = "*"
+sphinx = ">=7.1.2,<7.2.0"
 
 [tool.poetry.group.dev.dependencies]
+types-colorama = "*"
 types-requests = "^2.32.0"
 
 [tool.poetry.scripts]
@@ -35,14 +57,18 @@ verbosity = -1
 [tool.poe.tasks]
 tasks.cmd = "poe -v"
 tasks.help = "List available tasks"
-doc.cmd = "pdoc release_feed_mediola !release_feed_mediola.settings"
-doc.help = "Browse documentation"
+doc.cmd = "sphinx-build -aqEW -b man doc/sphinx build/man"
+doc.help = "Generate documentation"
 feed.script = "release_feed_mediola.cli:run"
 feed.help = """
 Print an Atom feed generated from the Mediola website. Requires an \
 argument."""
+html.cmd = "pdoc release_feed_mediola !release_feed_mediola.settings"
+html.help = "Browse HTML documentation"
 linter.cmd = "pylint --enable-all-extensions release_feed_mediola"
 linter.help = "Check for style violations"
+man.cmd = "man build/man/release-feed-mediola.1"
+man.help = "Open manual page"
 tests.cmd = "pytest"
 tests.help = "Run test suite"
 typecheck.cmd = "mypy"

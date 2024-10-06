@@ -1,9 +1,8 @@
 {
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+  "[json][jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    // Built-in formatter disrespects insert_final_newline in .editorconfig
+    "editor.formatOnSave": false
   },
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
@@ -13,10 +12,11 @@
   },
   "code-runner.clearPreviousOutput": true,
   "code-runner.executorMap": {
-    "python": "poetry run python",
+    "python": "poetry run python"
   },
   "code-runner.ignoreSelection": true,
   "code-runner.saveFileBeforeRun": true,
+  "editor.formatOnSave": true,
   "editor.rulers": [
     68,
     72
@@ -25,7 +25,6 @@
     "**/.git": true,
     "**/.mypy_cache": true,
     "**/.pytest_cache": true,
-    "**/.shims": true,
     "**/.venv": true,
     "**/*.egg-info": true,
     "**/__pycache__": true

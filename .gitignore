@@ -1,6 +1,15 @@
-/.venv/
 /build/
+/debian/.debhelper/generated/
+/debian/debhelper-build-stamp
+/debian/files
+/debian/release-feed-mediola/
+/debian/release-feed-mediola.*.debhelper
+/debian/release-feed-mediola.substvars
 /dist/
+/.pc/
+/.venv/
 *.egg-info
+*.log
+.pybuild
 .pytest_cache
 __pycache__

@@ -1,8 +1,13 @@
 {
   "recommendations": [
     "coolbear.systemd-unit-file",
+    "dawidd6.debian-vscode",
     "editorconfig.editorconfig",
+    "ms-python.black-formatter",
+    "ms-python.mypy-type-checker",
+    "ms-python.pylint",
     "ms-python.python",
+    "redhat.vscode-yaml",
     "tamasfe.even-better-toml"
   ]
 }
