@@ -1,5 +1,6 @@
 """A place for shared paths and settings."""
 
+import os
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -27,3 +28,5 @@ MEDIOLA_PRODUCTS = [
 ]
 
 REQUEST_TIMEOUT_SEC = 20
+
+debugMode = bool(os.getenv('RELEASE_FEED_MEDIOLA_DEBUG'))
