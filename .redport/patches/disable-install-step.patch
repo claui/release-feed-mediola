@@ -1,10 +1,10 @@
 diff --git a/hooks/post_gen_project.py b/hooks/post_gen_project.py
-index c3d1ed6..1c071ce 100644
+index d40d99c..d1241e2 100644
 --- a/hooks/post_gen_project.py
 +++ b/hooks/post_gen_project.py
-@@ -1,76 +1,2 @@
+@@ -1,24 +1,5 @@
 -import logging
--import os
+ import os
 -from pathlib import Path, PurePath
  import shutil
 -import subprocess
@@ -24,8 +24,13 @@ index c3d1ed6..1c071ce 100644
 -    (PurePath(config_dict['replay_dir']) / template_name).with_suffix('.json'),
 -    target_replay_path,
 -)
--
+ 
  shutil.rmtree('licenses')
+ 
+@@ -28,56 +9,3 @@ os.remove('{{ cookiecutter.project_slug }}/__main__.py')
+ os.remove('{{ cookiecutter.project_slug }}/cli.py')
+ os.remove('{{ cookiecutter.project_slug }}/fire_workarounds.py')
+ {% endif -%}
 -
 -{%- if cookiecutter.install_dependencies_now == "y" %}
 -def sysexit_formatted(message: str) -> None:

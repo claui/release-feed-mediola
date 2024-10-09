@@ -36,12 +36,14 @@ def release_feed(product_name: str | None) -> str:
     """
 
     releases_by_version = _download_releases_by_version()
-    packages_by_name = releases_by_version[FEED_SOURCE_LANGUAGE]["software"]
+    packages_by_name = releases_by_version[FEED_SOURCE_LANGUAGE][
+        'software'
+    ]
     if not product_name:
-        raise ValueError("Name cannot be empty.")
+        raise ValueError('Name cannot be empty.')
     if product_name not in packages_by_name:
         raise ValueError(
-            f"Name must be one of: {", ".join(MEDIOLA_PRODUCTS)}",
+            f'Name must be one of: {', '.join(MEDIOLA_PRODUCTS)}',
         )
     return feed.from_dict(
         product_name,
@@ -50,6 +52,11 @@ def release_feed(product_name: str | None) -> str:
 
 
 def _download_releases_by_version() -> dict[str, Any]:
-    response = requests.get(DOWNLOADS_JSON_URL, timeout=REQUEST_TIMEOUT_SEC)
+    logger.debug(
+        'Downloading vendor-provided JSON feed: %s', DOWNLOADS_JSON_URL
+    )
+    response = requests.get(
+        DOWNLOADS_JSON_URL, timeout=REQUEST_TIMEOUT_SEC
+    )
     response.raise_for_status()
     return cast(dict[str, Any], response.json())

@@ -7,6 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'release-feed-mediola'
+executable_name = 'release-feed-mediola'
 author = 'Claudia Pellegrino <clau@tiqua.de>'
 description = 'Atom feed for software product releases of Mediola AG'
 
@@ -30,7 +31,7 @@ exclude_patterns = []
 
 man_pages = [(
     'index',
-    project.lower(),
+    executable_name,
     description,
     [author],
     1,

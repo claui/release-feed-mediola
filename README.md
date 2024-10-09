@@ -12,13 +12,13 @@ Not affiliated with Mediola – connected living AG.
 To install `release-feed-mediola` from PyPI, open a shell and run:
 
 ```shell
-pip install release_feed_mediola
+pip install release-feed-mediola
 ```
 
 If that doesn’t work, try:
 
 ```shell
-python3 -m pip install release_feed_mediola
+python3 -m pip install release-feed-mediola
 ```
 
 ### Installing from the AUR

@@ -69,3 +69,12 @@ To disable the systemd timer for a given Mediola product, run:
 # Replace PRODUCT with the Mediola product name you want to track
 systemctl --user disable --now release-feed-mediola@PRODUCT.timer
 ```
+
+# Environment
+
+release-feed-mediola supports the following environment variable:
+
+`RELEASE_FEED_MEDIOLA_DEBUG`
+: If set to a non-zero value, causes release-feed-mediola to enable debug-level
+: logging.
+: Also prints stack traces for errors where it normally would not.
