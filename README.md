@@ -1,3 +1,19 @@
+# DEPRECATION NOTICE
+
+**This tool is now unmaintained**; use the
+[nvchecker](https://nvchecker.readthedocs.io) tool instead.
+
+Example configuration for your `.nvchecker.toml`:
+
+```toml
+[aio-remote-neo]
+source = "jq"
+url = "https://www.mediola.com/wp-content/sub-projects/helpdesk/data/downloads.json"
+filter = ".de.software.aioremote_desktop.current.info.version"
+```
+
+_____
+
 # release-feed-mediola
 
 A tool that generates Atom feeds for software updates of
